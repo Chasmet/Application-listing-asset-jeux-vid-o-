@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CHKAssetManager">
 
+        <activity android:name=".ui.BulkRegionActivity" />
         <activity android:name=".ui.EditAssetActivity" />
         <activity android:name=".ui.AssetListActivity" />
         <activity android:name=".ui.EditRegionActivity" />
