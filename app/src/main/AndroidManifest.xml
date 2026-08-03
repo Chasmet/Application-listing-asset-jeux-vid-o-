@@ -12,6 +12,7 @@
 
         <activity android:name=".ui.BulkRegionActivity" />
         <activity android:name=".ui.EditAssetActivity" />
+        <activity android:name=".ui.RegionAssetsActivity" />
         <activity android:name=".ui.AssetListActivity" />
         <activity android:name=".ui.EditRegionActivity" />
         <activity android:name=".ui.GameDetailActivity" />
