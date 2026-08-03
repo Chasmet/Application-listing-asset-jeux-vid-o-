@@ -73,10 +73,10 @@ public final class RegionListParser {
 
     public static String comparisonKey(String value) {
         if (value == null) return "";
-        String clean = Normalizer.normalize(value.trim().toLowerCase(Locale.ROOT), Normalizer.Form.NFD)
+        String withoutOrder = LEADING_MARKER.matcher(value.trim()).replaceFirst("");
+        return Normalizer.normalize(withoutOrder.toLowerCase(Locale.ROOT), Normalizer.Form.NFD)
                 .replaceAll("\\p{M}+", "")
                 .replaceAll("[^a-z0-9]+", " ")
                 .trim();
-        return clean;
     }
 }
