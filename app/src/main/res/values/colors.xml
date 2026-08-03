@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="background">#0C0F0D</color>
+    <color name="surface">#151A17</color>
+    <color name="surface_alt">#1D231F</color>
+    <color name="primary">#77D14C</color>
+    <color name="primary_dark">#4CA92D</color>
+    <color name="primary_soft">#23351D</color>
+    <color name="text_primary">#F4F7F3</color>
+    <color name="text_secondary">#AEB9B0</color>
+    <color name="divider">#2B332D</color>
+    <color name="status_todo">#68706A</color>
+    <color name="status_created">#E99B3A</color>
+    <color name="status_integrated">#77D14C</color>
+    <color name="danger">#E65D5D</color>
+</resources>
