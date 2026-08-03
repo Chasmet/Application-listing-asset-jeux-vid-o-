@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class BulkRegionActivity extends AppCompatActivity {
@@ -123,15 +124,19 @@ public class BulkRegionActivity extends AppCompatActivity {
             }
         }
 
+        List<Region> currentRegions = database.getRegions(gameId);
         Set<String> existing = new HashSet<>();
-        for (Region region : database.getRegions(gameId)) {
+        int existingCount = 0;
+        for (Region region : currentRegions) {
             if (region.getId() != sourceRegionId) {
                 existing.add(RegionListParser.comparisonKey(region.getName()));
+                existingCount++;
             }
         }
 
         int added = 0;
         int skipped = 0;
+        int nextNumber = existingCount + 1;
         String type = String.valueOf(spinnerType.getSelectedItem());
 
         for (String name : names) {
@@ -143,7 +148,7 @@ public class BulkRegionActivity extends AppCompatActivity {
 
             Region region = new Region();
             region.setGameId(gameId);
-            region.setName(name);
+            region.setName(String.format(Locale.FRANCE, "%02d. %s", nextNumber++, name));
             region.setType(type);
             region.setImageUri("");
             region.setNotes("");
