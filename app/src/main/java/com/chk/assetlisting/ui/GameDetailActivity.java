@@ -40,6 +40,7 @@ public class GameDetailActivity extends AppCompatActivity {
     private TextView description;
     private TextView progressText;
     private TextView emptyRegions;
+    private TextView regionCount;
     private ProgressBar progressBar;
     private MaterialToolbar toolbar;
     private MaterialButton buttonAddList;
@@ -68,6 +69,7 @@ public class GameDetailActivity extends AppCompatActivity {
         progressText = findViewById(R.id.textProgress);
         progressBar = findViewById(R.id.progress);
         emptyRegions = findViewById(R.id.textEmptyRegions);
+        regionCount = findViewById(R.id.textRegionCount);
         buttonAddList = findViewById(R.id.buttonAddRegionList);
         RecyclerView recycler = findViewById(R.id.recyclerRegions);
         MaterialButton all = findViewById(R.id.buttonAllAssets);
@@ -87,7 +89,9 @@ public class GameDetailActivity extends AppCompatActivity {
                 showRegionActions(region);
             }
         });
+
         recycler.setLayoutManager(new LinearLayoutManager(this));
+        recycler.setHasFixedSize(true);
         recycler.setAdapter(adapter);
 
         all.setOnClickListener(v -> openAllAssets());
@@ -108,6 +112,7 @@ public class GameDetailActivity extends AppCompatActivity {
 
     private void loadData() {
         if (database == null) return;
+
         Game game = database.getGame(gameId);
         if (game == null) {
             finish();
@@ -134,6 +139,7 @@ public class GameDetailActivity extends AppCompatActivity {
         List<Region> regions = database.getRegions(gameId);
         adapter.submitList(regions);
         emptyRegions.setVisibility(regions.isEmpty() ? View.VISIBLE : View.GONE);
+        regionCount.setText(regions.size() + (regions.size() > 1 ? " régions" : " région"));
 
         repairCandidate = null;
         for (Region region : regions) {
@@ -144,11 +150,8 @@ public class GameDetailActivity extends AppCompatActivity {
             }
         }
 
-        if (repairCandidate == null) {
-            buttonAddList.setText("COLLER UNE LISTE");
-        } else {
-            buttonAddList.setText("CORRIGER LA LISTE");
-        }
+        buttonAddList.setText(repairCandidate == null
+                ? "COLLER UNE LISTE" : "CORRIGER LA LISTE");
     }
 
     private void openSingleRegionEditor() {
