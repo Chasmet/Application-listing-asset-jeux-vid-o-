@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -176,9 +177,14 @@ public class GameDetailActivity extends AppCompatActivity {
     }
 
     private void openRegionAssets(Region region) {
-        Intent intent = new Intent(this, AssetListActivity.class);
-        intent.putExtra(AssetListActivity.EXTRA_GAME_ID, gameId);
-        intent.putExtra(AssetListActivity.EXTRA_REGION_ID, region.getId());
+        if (region == null || region.getId() <= 0) {
+            Toast.makeText(this, "Région introuvable", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Intent intent = new Intent(this, RegionAssetsActivity.class);
+        intent.putExtra(RegionAssetsActivity.EXTRA_GAME_ID, gameId);
+        intent.putExtra(RegionAssetsActivity.EXTRA_REGION_ID, region.getId());
         startActivity(intent);
     }
 
